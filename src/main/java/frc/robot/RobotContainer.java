@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -20,6 +21,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
     /* Controllers */
     private final XboxController driver = new XboxController(0);
+    private final Joystick operator = new Joystick(1);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -29,9 +31,11 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton roller = new JoystickButton(operator, 3);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
+    private final rollerTest s_roller = new rollerTest();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -59,6 +63,15 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1)));
+        //roller.toggleOnTrue(Commands.startEnd(s_roller::setSpeed(1), s_roller::stop(), s_roller));
+
+    //     myButton.toggleOnTrue(Commands.startEnd(mySubsystem::onMethod,
+    // mySubsystem::offMethod,
+    // mySubsystem));
+
+
+
     }
 
     /**
