@@ -32,10 +32,12 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton roller = new JoystickButton(operator, 3);
+    private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final rollerTest s_roller = new rollerTest();
+    private final limelight s_Limelight = new limelight();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -64,6 +66,7 @@ public class RobotContainer {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1)));
+        limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
         //roller.toggleOnTrue(Commands.startEnd(s_roller::setSpeed(1), s_roller::stop(), s_roller));
 
     //     myButton.toggleOnTrue(Commands.startEnd(mySubsystem::onMethod,
