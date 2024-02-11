@@ -32,12 +32,22 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton roller = new JoystickButton(operator, 3);
-    private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
+    //private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
+    private final JoystickButton open = new JoystickButton(operator, 7);
+    private final JoystickButton close = new JoystickButton(operator, 8);
+    private final JoystickButton runConveyor = new JoystickButton(operator, 9);
+    private final JoystickButton reverseConveyor = new JoystickButton(operator, 10);
+    private final JoystickButton intake = new JoystickButton(operator, 11);
+    
+    //private final JoystickButton stop = new JoystickButton(driver, 9);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final rollerTest s_roller = new rollerTest();
     private final limelight s_Limelight = new limelight();
+    private final arm s_Arm = new arm();
+    private final intake s_Intake = new intake();
+    private final gullet s_Gullet = new gullet();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -65,8 +75,25 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1)));
-        limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
+        roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1.0,0.65)));
+        roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
+        //limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
+        open.whileTrue(new InstantCommand(() -> s_Arm.open(0.4)));
+        open.whileFalse(new InstantCommand(() -> s_Arm.open(0)));
+        close.whileTrue(new InstantCommand(() -> s_Arm.close(-0.4)));
+        close.whileFalse(new InstantCommand(() -> s_Arm.close(0)));
+        
+        runConveyor.whileTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
+        runConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
+        
+        reverseConveyor.whileTrue(new InstantCommand(() -> s_Gullet.reverseConveyor()));
+        reverseConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
+
+
+        //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
+
+        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.25)));
+        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0)));
         //roller.toggleOnTrue(Commands.startEnd(s_roller::setSpeed(1), s_roller::stop(), s_roller));
 
     //     myButton.toggleOnTrue(Commands.startEnd(mySubsystem::onMethod,

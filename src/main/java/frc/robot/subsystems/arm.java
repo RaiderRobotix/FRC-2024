@@ -4,33 +4,34 @@
 
 package frc.robot.subsystems;
 
-
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class rollerTest extends SubsystemBase {
-  /** Creates a new rollerTest. */
 
-  private TalonFX Lroller;
-  private TalonFX Rroller;
+public class arm extends SubsystemBase {
+  /** Creates a new arm. */
+  private TalonFX armMotor;
+  public arm() {
 
-  public rollerTest() {
-    this.Rroller = new TalonFX(9);
-    this.Lroller = new TalonFX(0);
-    
+    this.armMotor = new TalonFX(1);
+    this.armMotor.setNeutralMode(NeutralModeValue.Brake);
+
   }
 
-  public void setSpeed(double Lspeed, double Rspeed){
-    Lroller.set(Lspeed);
-    Rroller.set(-Rspeed);
+  public void open(double speed){
+    armMotor.set(speed);
   }
 
+  public void close(double speed){
+    armMotor.set(speed);
+  }
 
   public void stop(){
-    Lroller.set(0);
-    Rroller.set(0);
+    armMotor.set(0);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
