@@ -10,11 +10,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class gullet extends SubsystemBase {
+public class conveyor extends SubsystemBase {
   /** Creates a new gullet. */
 
   private TalonSRX conveyor;
-  public gullet() {
+  public conveyor() {
     this.conveyor = new TalonSRX(7);
     
 

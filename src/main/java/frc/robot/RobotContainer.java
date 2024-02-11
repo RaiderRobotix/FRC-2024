@@ -43,11 +43,11 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final rollerTest s_roller = new rollerTest();
+    private final shooter s_roller = new shooter();
     private final limelight s_Limelight = new limelight();
     private final arm s_Arm = new arm();
     private final intake s_Intake = new intake();
-    private final gullet s_Gullet = new gullet();
+    private final conveyor s_Gullet = new conveyor();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */

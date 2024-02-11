@@ -9,13 +9,13 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class rollerTest extends SubsystemBase {
+public class shooter extends SubsystemBase {
   /** Creates a new rollerTest. */
 
   private TalonFX Lroller;
   private TalonFX Rroller;
 
-  public rollerTest() {
+  public shooter() {
     this.Rroller = new TalonFX(9);
     this.Lroller = new TalonFX(0);
     
