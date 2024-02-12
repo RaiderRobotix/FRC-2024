@@ -22,9 +22,9 @@ public class intake extends SubsystemBase {
 
   }
 
-  public void setIntakeSpeed(double speed){
-    l_intake.set(-speed);
-    r_intake.set(-speed);
+  public void setIntakeSpeed(double lspeed, double rspeed){
+    l_intake.set(-lspeed);
+    r_intake.set(-rspeed);
   }
 
   

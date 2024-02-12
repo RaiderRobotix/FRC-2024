@@ -38,6 +38,8 @@ public class RobotContainer {
     private final JoystickButton runConveyor = new JoystickButton(operator, 9);
     private final JoystickButton reverseConveyor = new JoystickButton(operator, 10);
     private final JoystickButton intake = new JoystickButton(operator, 11);
+    private final JoystickButton reverseintake = new JoystickButton(operator, 12);
+    private final JoystickButton trapButton = new JoystickButton(operator, 5);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
@@ -77,6 +79,11 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1.0,0.65)));
         roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
+
+        trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
+        trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
+        
+
         //limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
         open.whileTrue(new InstantCommand(() -> s_Arm.open(0.4)));
         open.whileFalse(new InstantCommand(() -> s_Arm.open(0)));
@@ -91,9 +98,15 @@ public class RobotContainer {
 
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
+        // ADD REVERSE FOR INTAKE
+        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.25)));
-        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0)));
+        reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
+        reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        
+
+
         //roller.toggleOnTrue(Commands.startEnd(s_roller::setSpeed(1), s_roller::stop(), s_roller));
 
     //     myButton.toggleOnTrue(Commands.startEnd(mySubsystem::onMethod,
