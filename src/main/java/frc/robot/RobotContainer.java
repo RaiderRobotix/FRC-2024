@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -85,10 +86,14 @@ public class RobotContainer {
         
 
         //limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
-        open.whileTrue(new InstantCommand(() -> s_Arm.open(0.4)));
-        open.whileFalse(new InstantCommand(() -> s_Arm.open(0)));
-        close.whileTrue(new InstantCommand(() -> s_Arm.close(-0.4)));
-        close.whileFalse(new InstantCommand(() -> s_Arm.close(0)));
+        open.and(new Trigger(s_Arm::upperLimitHit));
+        open.whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4),() -> s_Arm.setArmSpeed(0)));
+        //open.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        System.out.println(s_Arm.upperLimitHit());
+
+        close.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
+        close.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        
         
         runConveyor.whileTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         runConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
@@ -104,6 +109,28 @@ public class RobotContainer {
 
         reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
         reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+
+        // open.and(new Trigger(s_Arm::upperLimitHit).negate()).whileTrue(
+        //     new InstantCommand(() -> s_Arm.setArmSpeed(0.4)))
+        //     .whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        
+        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).whileTrue(
+        //     new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)))
+        //     .whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+
+        // open.toggleOnTrue(Commands.startEnd(s_Arm::open,
+        //     s_Arm::stop,
+        //     s_Arm));
+
+        // close.toggleOnTrue(Commands.startEnd(s_Arm::close,
+        //     s_Arm::stop,
+        //     s_Arm));
+        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).whileTrue(
+        //     new StartEndCommand(
+        //         () -> s_Arm.setArmSpeed(-0.4),
+        //         () -> s_Arm.stop(),
+        //         s_Arm)
+        // );
         
 
 
