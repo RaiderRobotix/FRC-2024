@@ -73,14 +73,18 @@ public class arm extends SubsystemBase {
     }
   }
 
+  public void setCoastMode(){
+    armMotor.setNeutralMode(NeutralModeValue.Coast);
+  }
+
   public boolean upperLimitHit()
     {
-        return getPotValue() >= 0.08;
+        return getPotValue() >= 0.123;
     }
 
     public boolean lowerLimitHit()
     {
-        return getPotValue() <= 0.07;
+        return getPotValue() <= 0.05;
     }
 
   @Override

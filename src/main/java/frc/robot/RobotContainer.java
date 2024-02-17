@@ -36,10 +36,12 @@ public class RobotContainer {
     //private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
     private final JoystickButton open = new JoystickButton(operator, 7);
     private final JoystickButton close = new JoystickButton(operator, 8);
+    private final JoystickButton openMan = new JoystickButton(operator, 11);
+    private final JoystickButton closeMan = new JoystickButton(operator, 12);
     private final JoystickButton runConveyor = new JoystickButton(operator, 9);
     private final JoystickButton reverseConveyor = new JoystickButton(operator, 10);
-    private final JoystickButton intake = new JoystickButton(operator, 11);
-    private final JoystickButton reverseintake = new JoystickButton(operator, 12);
+    //private final JoystickButton intake = new JoystickButton(operator, 11);
+    //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
     private final JoystickButton trapButton = new JoystickButton(operator, 5);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
@@ -86,13 +88,28 @@ public class RobotContainer {
         
 
         //limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
-        open.and(new Trigger(s_Arm::upperLimitHit));
-        open.whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4),() -> s_Arm.setArmSpeed(0)));
+        open.and(new Trigger(s_Arm::upperLimitHit).negate()).
+        whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
+                    () -> s_Arm.setArmSpeed(0),s_Arm));
+        
+        close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
+        whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4),
+                    () -> s_Arm.setArmSpeed(0),s_Arm));
         //open.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-        System.out.println(s_Arm.upperLimitHit());
+        //System.out.println(s_Arm.upperLimitHit());
 
-        close.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
-        close.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        // close.and(new Trigger(s_Arm::lowerLimitHit)).
+        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
+        //             () -> s_Arm.setArmSpeed(0),s_Arm));
+
+        closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
+        closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+
+        openMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(0.4)));
+        openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
+        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
+        //             () -> s_Arm.setArmSpeed(0),s_Arm));
         
         
         runConveyor.whileTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
@@ -104,11 +121,11 @@ public class RobotContainer {
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         // ADD REVERSE FOR INTAKE
-        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
-        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        // intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        // intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
-        reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        // reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
+        // reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
         // open.and(new Trigger(s_Arm::upperLimitHit).negate()).whileTrue(
         //     new InstantCommand(() -> s_Arm.setArmSpeed(0.4)))
