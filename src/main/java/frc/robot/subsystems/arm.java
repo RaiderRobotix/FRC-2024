@@ -51,28 +51,6 @@ public class arm extends SubsystemBase {
         return this.pot.get();
     }
 
-  public void runArmTHing(){
-    
-  }
-
-  public void open(){
-    if(lowerLimitHit()){
-      setArmSpeed(0);
-    }
-    else{
-      setArmSpeed(0.4);
-    }
-  }
-
-  public void close(){
-    if(lowerLimitHit()){
-      setArmSpeed(0);
-    }
-    else{
-      setArmSpeed(-0.4);
-    }
-  }
-
   public void setCoastMode(){
     armMotor.setNeutralMode(NeutralModeValue.Coast);
   }

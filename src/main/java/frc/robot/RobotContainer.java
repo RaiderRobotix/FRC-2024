@@ -32,17 +32,17 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton roller = new JoystickButton(operator, 3);
+    private final JoystickButton roller = new JoystickButton(driver, XboxController.Button.kB.value);
     //private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
-    private final JoystickButton open = new JoystickButton(operator, 7);
-    private final JoystickButton close = new JoystickButton(operator, 8);
-    private final JoystickButton openMan = new JoystickButton(operator, 11);
-    private final JoystickButton closeMan = new JoystickButton(operator, 12);
-    private final JoystickButton runConveyor = new JoystickButton(operator, 9);
-    private final JoystickButton reverseConveyor = new JoystickButton(operator, 10);
-    //private final JoystickButton intake = new JoystickButton(operator, 11);
-    //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
-    private final JoystickButton trapButton = new JoystickButton(operator, 5);
+    private final JoystickButton open = new JoystickButton(operator, 5);
+    private final JoystickButton close = new JoystickButton(operator, 3);
+    // private final JoystickButton openMan = new JoystickButton(operator, 11);
+    // private final JoystickButton closeMan = new JoystickButton(operator, 12);
+    private final JoystickButton runConveyor = new JoystickButton(operator, 10);
+    private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
+    private final JoystickButton intake = new JoystickButton(operator, 11);
+    private final JoystickButton reverseintake = new JoystickButton(operator, 12);
+    //private final JoystickButton trapButton = new JoystickButton(operator, 5);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
@@ -58,11 +58,12 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(
+
             new TeleopSwerve(
-                s_Swerve, 
+                s_Swerve,
                 () -> -driver.getRawAxis(translationAxis), 
-                () -> driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
+                () -> driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
         );
@@ -83,11 +84,9 @@ public class RobotContainer {
         roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1.0,0.65)));
         roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
 
-        trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
-        trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
+        // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
+        // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
-
-        //limelightTrack.whileTrue((new findTag(s_Swerve, s_Limelight)));
         open.and(new Trigger(s_Arm::upperLimitHit).negate()).
         whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
                     () -> s_Arm.setArmSpeed(0),s_Arm));
@@ -95,21 +94,12 @@ public class RobotContainer {
         close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
         whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4),
                     () -> s_Arm.setArmSpeed(0),s_Arm));
-        //open.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-        //System.out.println(s_Arm.upperLimitHit());
 
-        // close.and(new Trigger(s_Arm::lowerLimitHit)).
-        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
-        //             () -> s_Arm.setArmSpeed(0),s_Arm));
+        // closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
+        // closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
 
-        closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
-        closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-
-        openMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(0.4)));
-        openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
-        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
-        //             () -> s_Arm.setArmSpeed(0),s_Arm));
+        // openMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(0.4)));
+        // openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
         
         
         runConveyor.whileTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
@@ -121,41 +111,18 @@ public class RobotContainer {
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         // ADD REVERSE FOR INTAKE
-        // intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
-        // intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        // reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
-        // reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
+        reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        // open.and(new Trigger(s_Arm::upperLimitHit).negate()).whileTrue(
-        //     new InstantCommand(() -> s_Arm.setArmSpeed(0.4)))
-        //     .whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-        
-        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).whileTrue(
-        //     new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)))
-        //     .whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
-
-        // open.toggleOnTrue(Commands.startEnd(s_Arm::open,
-        //     s_Arm::stop,
-        //     s_Arm));
-
-        // close.toggleOnTrue(Commands.startEnd(s_Arm::close,
-        //     s_Arm::stop,
-        //     s_Arm));
-        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).whileTrue(
-        //     new StartEndCommand(
-        //         () -> s_Arm.setArmSpeed(-0.4),
-        //         () -> s_Arm.stop(),
-        //         s_Arm)
-        // );
         
 
 
         //roller.toggleOnTrue(Commands.startEnd(s_roller::setSpeed(1), s_roller::stop(), s_roller));
 
-    //     myButton.toggleOnTrue(Commands.startEnd(mySubsystem::onMethod,
-    // mySubsystem::offMethod,
-    // mySubsystem));
+
 
 
 
