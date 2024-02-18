@@ -16,21 +16,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-public class arm extends SubsystemBase {
+public class Arm extends SubsystemBase {
   /** Creates a new arm. */
+
   private TalonFX armMotor;
-  private AnalogPotentiometer pot;
+  private AnalogPotentiometer armPot;
 
-   private ShuffleboardTab tab = Shuffleboard.getTab("default");
-    private GenericEntry potEntry = tab.add("Arm Pot", 0).withSize(2, 1).getEntry();
-    private GenericEntry safetyEntry = tab.add("Arm Safety Hit", false).withSize(2, 1).getEntry();
+  private ShuffleboardTab tab = Shuffleboard.getTab("default");
+  private GenericEntry potEntry = tab.add("Arm Pot", 0).withSize(2, 1).getEntry();
+  private GenericEntry safetyEntry = tab.add("Arm Safety Hit", false).withSize(2, 1).getEntry();
 
-  public arm() {
+   
 
-    this.armMotor = new TalonFX(1);
+  public Arm() {
+
+    this.armMotor = new TalonFX(Constants.Arm.TalonDeviceID);
     this.armMotor.setNeutralMode(NeutralModeValue.Brake);
 
-    this.pot = new AnalogPotentiometer(1);
+    this.armPot = new AnalogPotentiometer(Constants.Arm.PotentiometerChannel);
 
   }
 
@@ -38,9 +41,13 @@ public class arm extends SubsystemBase {
     armMotor.set(speed);
   }
 
-  // public void close(double speed){
-  //   armMotor.set(speed);
-  // }
+  public void moveArmUp(double speed){
+    armMotor.set(-speed);
+  }
+
+  public void moveArmDown(double speed){
+    armMotor.set(speed);
+  }
 
   public void stop(){
     armMotor.set(0);
@@ -48,23 +55,19 @@ public class arm extends SubsystemBase {
 
   public double getPotValue()
     {
-        return this.pot.get();
+        return this.armPot.get();
     }
-
-  public void setCoastMode(){
-    armMotor.setNeutralMode(NeutralModeValue.Coast);
-  }
 
   public boolean upperLimitHit()
     {
-        return getPotValue() >= 0.123;
+        return getPotValue() >= Constants.Arm.UpperSafety;
     }
 
-    public boolean lowerLimitHit()
-    {
-        return getPotValue() <= 0.05;
-    }
-
+  public boolean lowerLimitHit()
+  {
+      return getPotValue() <= Constants.Arm.LowerSafety;
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

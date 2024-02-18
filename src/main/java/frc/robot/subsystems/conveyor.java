@@ -8,27 +8,27 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
-public class conveyor extends SubsystemBase {
+public class Conveyor extends SubsystemBase {
   /** Creates a new gullet. */
 
   private TalonSRX conveyor;
-  public conveyor() {
-    this.conveyor = new TalonSRX(7);
-    
-
+  
+  public Conveyor() {
+    this.conveyor = new TalonSRX(Constants.Conveyor.TalonSRXDeviceID);
   }
 
   public void runConveyor(){
-    conveyor.set(TalonSRXControlMode.PercentOutput, 0.2);
+    conveyor.set(TalonSRXControlMode.PercentOutput, Constants.Conveyor.MotorPercentOutput);
   }
   public void stopConveyor(){
     conveyor.set(TalonSRXControlMode.PercentOutput, 0);
   }
 
   public void reverseConveyor(){
-    conveyor.set(TalonSRXControlMode.PercentOutput, -0.2);
+    conveyor.set(TalonSRXControlMode.PercentOutput, -Constants.Conveyor.MotorPercentOutput);
   }
 
   @Override

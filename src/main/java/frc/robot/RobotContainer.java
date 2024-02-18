@@ -50,9 +50,9 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     private final shooter s_roller = new shooter();
     private final limelight s_Limelight = new limelight();
-    private final arm s_Arm = new arm();
+    private final Arm s_Arm = new Arm();
     private final intake s_Intake = new intake();
-    private final conveyor s_Gullet = new conveyor();
+    private final Conveyor s_Gullet = new Conveyor();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -81,19 +81,32 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        roller.whileTrue(new InstantCommand(() -> s_roller.setSpeed(1.0,0.65)));
-        roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
+
+        roller.whileTrue(new StartEndCommand(() -> s_roller.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
+                                            () -> s_roller.stop()));
+        //roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
 
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
         // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
+
+        //ORIGINAL FOR POT ARM LIMIT
+        // open.and(new Trigger(s_Arm::upperLimitHit).negate()).
+        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4), //Negative is moving the arm up
+        //             () -> s_Arm.setArmSpeed(0),s_Arm));
+        
+        // close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
+        // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4), //Positive is moving the arm down
+        //             () -> s_Arm.setArmSpeed(0),s_Arm));
+
+        //NEED TO TEST
         open.and(new Trigger(s_Arm::upperLimitHit).negate()).
-        whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4),
-                    () -> s_Arm.setArmSpeed(0),s_Arm));
+        whileTrue(new StartEndCommand(() -> s_Arm.moveArmUp(Constants.Arm.ManualMotorSpeed), //Negative is moving the arm up
+                    () -> s_Arm.stop(),s_Arm));
         
         close.and(new Trigger(s_Arm::lowerLimitHit).negate()).
-        whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(0.4),
-                    () -> s_Arm.setArmSpeed(0),s_Arm));
+        whileTrue(new StartEndCommand(() -> s_Arm.moveArmDown(Constants.Arm.ManualMotorSpeed), //Positive is moving the arm down
+                    () -> s_Arm.stop(),s_Arm));
 
         // closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
         // closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
@@ -102,20 +115,24 @@ public class RobotContainer {
         // openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
         
         
-        runConveyor.whileTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
-        runConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
+        runConveyor.whileTrue(new StartEndCommand(() -> s_Gullet.runConveyor(),
+                                                    () -> s_Gullet.stopConveyor()));
+        //runConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
         
-        reverseConveyor.whileTrue(new InstantCommand(() -> s_Gullet.reverseConveyor()));
-        reverseConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
+        reverseConveyor.whileTrue(new StartEndCommand(() -> s_Gullet.reverseConveyor(),
+                                                            () -> s_Gullet.stopConveyor()));
+        //reverseConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
 
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         // ADD REVERSE FOR INTAKE
-        intake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
-        intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        intake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35),
+                                            () -> s_Intake.setIntakeSpeed(0,0))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        //intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        reverseintake.whileTrue(new InstantCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35)));
-        reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
+        reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35),
+                                                    () -> s_Intake.setIntakeSpeed(0,0) ));
+        //reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
         
 

@@ -15,6 +15,40 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
     public static final double stickDeadband = 0.1;
 
+    public static final class Arm{
+        public static int TalonDeviceID = 1;
+        public static int PotentiometerChannel = 1;
+
+        public static double UpperSafety = 0.123;
+        public static double LowerSafety = 0.05;
+
+        public static double ManualMotorSpeed = 0.4;
+        
+    }
+
+    public static final class Conveyor{
+        public static int TalonSRXDeviceID = 7;
+
+        public static double MotorPercentOutput = 0.2;
+    }
+
+    public static final class Shooter{
+        public static int TalonRRoller = 9;
+        public static int TalonLRoller = 0;
+
+        public static double RRollerSpeed = 0.65;
+        public static double LRollerSpeed = 1.0;
+    }
+
+    public static final class Intake{
+        public static int LIntakeMotorID = 8;
+        public static int RIntakeMotorID = 6;
+
+        public static double LIntakeMotorSpeed = 0.35;
+        public static double RIntakeMotorSpeed = 0.35;
+
+    }
+
     public static final class Swerve {
         public static final int pigeonID = 1;
         public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
@@ -145,4 +179,5 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+
 }

@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class shooter extends SubsystemBase {
   /** Creates a new rollerTest. */
@@ -16,8 +17,8 @@ public class shooter extends SubsystemBase {
   private TalonFX Rroller;
 
   public shooter() {
-    this.Rroller = new TalonFX(9);
-    this.Lroller = new TalonFX(0);
+    this.Rroller = new TalonFX(Constants.Shooter.TalonRRoller);
+    this.Lroller = new TalonFX(Constants.Shooter.TalonLRoller);
     
   }
 
