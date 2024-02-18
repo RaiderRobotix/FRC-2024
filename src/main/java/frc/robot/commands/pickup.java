@@ -4,16 +4,26 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class pickup extends ParallelCommandGroup {
   /** Creates a new pickup. */
-  public pickup() {
+  public pickup(intake m_Intake, Arm m_Arm, Conveyor m_Conveyor) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new InstantCommand(() -> m_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed, Constants.Intake.RIntakeMotorSpeed)),
+      new setArmPosition(m_Arm, 0.05),
+      new InstantCommand(() -> m_Conveyor.runConveyor())
+      
+    );
   }
 }

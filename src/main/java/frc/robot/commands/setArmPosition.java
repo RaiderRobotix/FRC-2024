@@ -5,20 +5,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 
 public class setArmPosition extends Command {
   /** Creates a new setArmPosition. */
 
-  private final Arm m_arm;
-  private double position;
-  private double initalHeight;
+  private Arm m_arm;
+  private double targetPosition;
+  private double initialHeight;
   private boolean isDone = false;
 
-  public setArmPosition(Arm m_arm, double position) {
+  public setArmPosition(Arm m_arm, double targetPosition) {
 
     this.m_arm = m_arm;
-    this.position = position; // Position is the Pot Value
+    this.targetPosition = targetPosition; // Position is the Pot Value
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_arm);
@@ -28,7 +29,7 @@ public class setArmPosition extends Command {
   @Override
   public void initialize() {
     this.isDone = false;
-    this.initalHeight = m_arm.getPotValue();
+    this.initialHeight = m_arm.getPotValue();
 
   }
 
@@ -36,7 +37,35 @@ public class setArmPosition extends Command {
   @Override
   public void execute() {
     
-
+    if (targetPosition > Constants.Arm.UpperSafety || targetPosition < Constants.Arm.LowerSafety) 
+        {
+            end(true);
+        }
+  
+        if(initialHeight < targetPosition)
+        {
+            if(m_arm.getPotValue() < targetPosition) 
+            {
+                m_arm.moveArmUp(Constants.Arm.AutoMotorSpeed);
+            } 
+            else 
+            {
+                m_arm.stop();
+                isDone = true;
+            }
+        } 
+        else if (initialHeight > targetPosition) 
+        {
+            if(m_arm.getPotValue() > targetPosition) 
+            {
+                m_arm.moveArmDown(Constants.Arm.AutoMotorSpeed);
+            } 
+            else 
+            {
+                m_arm.stop();
+                isDone = true;
+            }
+        }
 
 
 
@@ -44,11 +73,13 @@ public class setArmPosition extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_arm.stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

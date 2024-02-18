@@ -42,17 +42,23 @@ public class RobotContainer {
     private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
     private final JoystickButton reverseintake = new JoystickButton(operator, 12);
+
+
+    private final JoystickButton pickupNote = new JoystickButton(operator, 7);
+
+
+
     //private final JoystickButton trapButton = new JoystickButton(operator, 5);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final shooter s_roller = new shooter();
+    private final shooter s_Shooter = new shooter();
     private final limelight s_Limelight = new limelight();
     private final Arm s_Arm = new Arm();
     private final intake s_Intake = new intake();
-    private final Conveyor s_Gullet = new Conveyor();
+    private final Conveyor s_Conveyor = new Conveyor();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -82,8 +88,14 @@ public class RobotContainer {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        roller.whileTrue(new StartEndCommand(() -> s_roller.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
-                                            () -> s_roller.stop()));
+        roller.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
+                                            () -> s_Shooter.stop()));
+
+        
+        //TODO NEED TO TEST!
+        pickupNote.onTrue(new pickup(s_Intake, s_Arm, s_Conveyor));
+
+
         //roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
 
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
@@ -115,12 +127,12 @@ public class RobotContainer {
         // openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
         
         
-        runConveyor.whileTrue(new StartEndCommand(() -> s_Gullet.runConveyor(),
-                                                    () -> s_Gullet.stopConveyor()));
+        runConveyor.whileTrue(new StartEndCommand(() -> s_Conveyor.runConveyor(),
+                                                    () -> s_Conveyor.stopConveyor()));
         //runConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
         
-        reverseConveyor.whileTrue(new StartEndCommand(() -> s_Gullet.reverseConveyor(),
-                                                            () -> s_Gullet.stopConveyor()));
+        reverseConveyor.whileTrue(new StartEndCommand(() -> s_Conveyor.reverseConveyor(),
+                                                            () -> s_Conveyor.stopConveyor()));
         //reverseConveyor.whileFalse(new InstantCommand(() -> s_Gullet.stopConveyor()));
 
 

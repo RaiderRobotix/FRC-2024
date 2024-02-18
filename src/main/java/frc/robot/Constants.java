@@ -22,7 +22,8 @@ public final class Constants {
         public static double UpperSafety = 0.123;
         public static double LowerSafety = 0.05;
 
-        public static double ManualMotorSpeed = 0.4;
+        public static double ManualMotorSpeed = 0.3;
+        public static double AutoMotorSpeed = 0.5;
         
     }
 
