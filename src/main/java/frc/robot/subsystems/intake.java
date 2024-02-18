@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class intake extends SubsystemBase {
   /** Creates a new intake. */
@@ -17,8 +18,8 @@ public class intake extends SubsystemBase {
   private CANSparkMax r_intake;
 
   public intake() {
-    this.l_intake = new CANSparkMax(8, MotorType.kBrushless);
-    this.r_intake = new CANSparkMax(6, MotorType.kBrushless);
+    this.l_intake = new CANSparkMax(Constants.Intake.LIntakeMotorID, MotorType.kBrushless);
+    this.r_intake = new CANSparkMax(Constants.Intake.RIntakeMotorID, MotorType.kBrushless);
 
   }
 
@@ -27,7 +28,11 @@ public class intake extends SubsystemBase {
     r_intake.set(-rspeed);
   }
 
-  
+  public void stop(){
+    l_intake.set(0);
+    r_intake.set(0);
+  }
+
 
   @Override
   public void periodic() {

@@ -22,14 +22,13 @@ public class Arm extends SubsystemBase {
   private TalonFX armMotor;
   private AnalogPotentiometer armPot;
 
+  
+
   private ShuffleboardTab tab = Shuffleboard.getTab("default");
   private GenericEntry potEntry = tab.add("Arm Pot", 0).withSize(2, 1).getEntry();
   private GenericEntry safetyEntry = tab.add("Arm Safety Hit", false).withSize(2, 1).getEntry();
 
-   
-
   public Arm() {
-
     this.armMotor = new TalonFX(Constants.Arm.TalonDeviceID);
     this.armMotor.setNeutralMode(NeutralModeValue.Brake);
 

@@ -126,12 +126,12 @@ public class RobotContainer {
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         // ADD REVERSE FOR INTAKE
-        intake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(0.35,0.35),
-                                            () -> s_Intake.setIntakeSpeed(0,0))); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        intake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
+                                            () -> s_Intake.stop())); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
         //intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-0.35,-0.35),
-                                                    () -> s_Intake.setIntakeSpeed(0,0) ));
+        reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
+                                                    () -> s_Intake.stop()));
         //reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
         

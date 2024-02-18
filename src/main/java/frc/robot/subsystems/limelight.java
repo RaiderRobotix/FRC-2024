@@ -81,6 +81,9 @@ public class limelight extends SubsystemBase {
 
   }
 
+  public void getEstimatedPotValue(double getDistanceInches){
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
