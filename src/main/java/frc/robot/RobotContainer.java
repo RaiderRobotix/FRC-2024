@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -32,7 +34,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton roller = new JoystickButton(driver, XboxController.Button.kB.value);
+    private final JoystickButton roller = new JoystickButton(operator, 1);
     //private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
     private final JoystickButton open = new JoystickButton(operator, 5);
     private final JoystickButton close = new JoystickButton(operator, 3);
@@ -45,10 +47,11 @@ public class RobotContainer {
 
 
     private final JoystickButton pickupNote = new JoystickButton(operator, 7);
+    
 
 
 
-    //private final JoystickButton trapButton = new JoystickButton(operator, 5);
+    private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
@@ -67,8 +70,8 @@ public class RobotContainer {
 
             new TeleopSwerve(
                 s_Swerve,
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
+                () -> driver.getRawAxis(translationAxis), 
+                () -> driver.getRawAxis(strafeAxis), 
                 () -> driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
@@ -77,6 +80,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
     }
+
 
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
@@ -93,7 +97,7 @@ public class RobotContainer {
 
         
         //TODO NEED TO TEST!
-        pickupNote.onTrue(new pickup(s_Intake, s_Arm, s_Conveyor));
+       pickupNote.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
 
 
         //roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
@@ -101,6 +105,8 @@ public class RobotContainer {
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
         // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
+        trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(0.45,0.45),
+                                            () -> s_Shooter.stop()));
 
         //ORIGINAL FOR POT ARM LIMIT
         // open.and(new Trigger(s_Arm::upperLimitHit).negate()).
@@ -142,7 +148,7 @@ public class RobotContainer {
                                             () -> s_Intake.stop())); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
         //intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
+        reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed,-Constants.Intake.RIntakeMotorSpeed),
                                                     () -> s_Intake.stop()));
         //reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
