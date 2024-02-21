@@ -61,10 +61,10 @@ public class findTag extends Command {
         if(s_Limelight.getTx() > 27){
           //Have to change the 27 and make it so robot moves till 27
         }
-        else if(s_Limelight.getTx() < 27){
+        else if(s_Limelight.getTx() < 27){}
           //Have ot change the 27 and make so robot moves till 27
       }
-  
+        
       //s_Limelight.estimateDistance();
 
     }

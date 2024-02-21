@@ -16,30 +16,6 @@
           "data": {
             "pathName": "Auton 1 Part 1"
           }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shooterAutoTest"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Auton 1 Part 2"
-          }
         }
       ]
     }

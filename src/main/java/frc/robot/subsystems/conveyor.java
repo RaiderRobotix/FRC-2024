@@ -7,17 +7,19 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
 public class Conveyor extends SubsystemBase {
   /** Creates a new gullet. */
-
+  private DigitalInput lineBreaker;
   private TalonSRX conveyor;
   
   public Conveyor() {
     this.conveyor = new TalonSRX(Constants.Conveyor.TalonSRXDeviceID);
+    this.lineBreaker = new DigitalInput(0);
   }
 
   public void runConveyor(){
@@ -30,6 +32,12 @@ public class Conveyor extends SubsystemBase {
   public void reverseConveyor(){
     conveyor.set(TalonSRXControlMode.PercentOutput, -Constants.Conveyor.MotorPercentOutput);
   }
+
+  public boolean getLineBreakerVal(){
+    return lineBreaker.get();
+  }
+
+
 
   @Override
   public void periodic() {
