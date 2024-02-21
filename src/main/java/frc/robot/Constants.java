@@ -39,6 +39,9 @@ public final class Constants {
 
         public static double RRollerSpeed = 0.65;
         public static double LRollerSpeed = 1.0;
+
+        public static double RTrapRollerSpeed = 0.45;
+        public static double LTrapRollerSpeed = 0.45;
     }
 
     public static final class Intake{

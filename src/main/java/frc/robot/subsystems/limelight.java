@@ -51,6 +51,12 @@ public class limelight extends SubsystemBase {
     }
   }
 
+  public double getTx(){
+    return this.tx;
+  }
+
+ 
+
   public void Update_Tracking() {
     this.tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // Target Found
     this.tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal
@@ -58,7 +64,7 @@ public class limelight extends SubsystemBase {
     this.area = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); // Target Area
 }
 
-  public void estimateDistance(){
+  public double estimateDistance(){
     double targetOffsetAngle_Vertical = ty;
 
 
@@ -78,10 +84,12 @@ public class limelight extends SubsystemBase {
     double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
 
     System.out.println(distanceFromLimelightToGoalInches);
+    return distanceFromLimelightToGoalInches;
 
   }
 
-  public void getEstimatedPotValue(double getDistanceInches){
+  public double getEstimatedPotValue(double getDistanceInches){
+    return 0.0;
   }
 
   @Override

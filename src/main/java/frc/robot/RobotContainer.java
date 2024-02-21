@@ -2,9 +2,12 @@ package frc.robot;
 
 import java.time.Instant;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -63,6 +66,7 @@ public class RobotContainer {
     private final intake s_Intake = new intake();
     private final Conveyor s_Conveyor = new Conveyor();
 
+    private SendableChooser<Command> autoChooser;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -79,6 +83,8 @@ public class RobotContainer {
 
         // Configure the button bindings
         configureButtonBindings();
+
+        autoChooser = AutoBuilder.buildAutoChooser();
     }
 
 
@@ -105,7 +111,7 @@ public class RobotContainer {
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
         // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
-        trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(0.45,0.45),
+        trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LTrapRollerSpeed,Constants.Shooter.RTrapRollerSpeed),
                                             () -> s_Shooter.stop()));
 
         //ORIGINAL FOR POT ARM LIMIT
@@ -170,6 +176,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new exampleAuto(s_Swerve);
+        return autoChooser.getSelected();
     }
 }
