@@ -39,7 +39,7 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton roller = new JoystickButton(operator, 1);
-    //private final JoystickButton limelightTrack = new JoystickButton(operator, 4);
+    private final JoystickButton limelightTrack = new JoystickButton(operator, 6);
     private final JoystickButton open = new JoystickButton(operator, 5);
     private final JoystickButton close = new JoystickButton(operator, 3);
     // private final JoystickButton openMan = new JoystickButton(operator, 11);
@@ -135,6 +135,8 @@ public class RobotContainer {
         whileTrue(new StartEndCommand(() -> s_Arm.moveArmDown(Constants.Arm.ManualMotorSpeed), //Positive is moving the arm down
                     () -> s_Arm.stop(),s_Arm));
 
+        limelightTrack.whileTrue(new InstantCommand(() -> s_Limelight.estimateDistance()));
+
         // closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
         // closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
 
@@ -159,6 +161,9 @@ public class RobotContainer {
 
         reverseintake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed,-Constants.Intake.RIntakeMotorSpeed),
                                                     () -> s_Intake.stop()));
+
+
+        
         //reverseintake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
         

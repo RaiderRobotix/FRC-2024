@@ -69,13 +69,13 @@ public class limelight extends SubsystemBase {
 
 
     // how many degrees back is your limelight rotated from perfectly vertical?
-    double limelightMountAngleDegrees = 0;//Math.arctan((goalHeightInches-limelightLensHeightInches)/); 
+    double limelightMountAngleDegrees = 30;//Math.arctan((goalHeightInches-limelightLensHeightInches)/); 
 
     // distance from the center of the Limelight lens to the floor
     double limelightLensHeightInches = 19.75;
 
     // distance from the target to the floor
-    double goalHeightInches = 42.25; 
+    double goalHeightInches = 51.9685039; 
 
     double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
     double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
@@ -107,6 +107,7 @@ public class limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightY", this.ty);
     SmartDashboard.putNumber("LimelightV", tv);
     SmartDashboard.putNumber("LimelightArea", this.area);
+    SmartDashboard.putNumber("Limelight Distance Value", estimateDistance());
     
 
 
