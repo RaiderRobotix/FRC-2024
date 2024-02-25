@@ -22,9 +22,9 @@ public class TeleopSwerve extends Command {
     private BooleanSupplier robotCentricSup;
     private double maxSpeed;
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
+    public TeleopSwerve(Swerve s_Swerve, XboxController s_driver ,DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
         this.s_Swerve = s_Swerve;
-        //this.s_driver = s_driver;
+        this.s_driver = s_driver;
         addRequirements(s_Swerve);
 
         this.translationSup = translationSup;
@@ -37,13 +37,13 @@ public class TeleopSwerve extends Command {
     public void execute() {
         /* Get Values, Deadband*/
 
-        // if(s_driver.getRawAxis(2) >= .70){
-        //     maxSpeed = 0.22;
-        // } else if (s_driver.getRawAxis(3) >= .70){
-        //     maxSpeed = 1;
-        // } else {
-        //     maxSpeed = 0.6;
-        // }
+        if(s_driver.getRawAxis(2) >= .70){
+            maxSpeed = 0.22;
+        } else if (s_driver.getRawAxis(3) >= .70){
+            maxSpeed = 1;
+        } else {
+            maxSpeed = 0.6;
+        }
 
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband); //* maxSpeed;
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband); //* maxSpeed;

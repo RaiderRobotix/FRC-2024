@@ -72,7 +72,7 @@ public class limelight extends SubsystemBase {
     double limelightMountAngleDegrees = 30;//Math.arctan((goalHeightInches-limelightLensHeightInches)/); 
 
     // distance from the center of the Limelight lens to the floor
-    double limelightLensHeightInches = 19.75;
+    double limelightLensHeightInches = 12;
 
     // distance from the target to the floor
     double goalHeightInches = 51.9685039; 

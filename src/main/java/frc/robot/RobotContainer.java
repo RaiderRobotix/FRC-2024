@@ -48,11 +48,12 @@ public class RobotContainer {
     private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
     private final JoystickButton reverseintake = new JoystickButton(operator, 12);
-
-
-    private final JoystickButton pickupNote = new JoystickButton(operator, 7);
+    private final JoystickButton ampSpeedSHoot = new JoystickButton(operator, 4);
     
 
+    private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
+    private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 2);
+    
 
 
     private final JoystickButton trapButton = new JoystickButton(operator, 8);
@@ -67,7 +68,7 @@ public class RobotContainer {
     private final intake s_Intake = new intake();
     private final Conveyor s_Conveyor = new Conveyor();
 
-    //private SendableChooser<Command> autoChooser;
+    private SendableChooser<Command> autoChooser;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -75,6 +76,7 @@ public class RobotContainer {
 
             new TeleopSwerve(
                 s_Swerve,
+                driver,
                 () -> driver.getRawAxis(translationAxis), 
                 () -> driver.getRawAxis(strafeAxis), 
                 () -> driver.getRawAxis(rotationAxis), 
@@ -85,9 +87,9 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
 
-       // autoChooser = AutoBuilder.buildAutoChooser();
+        autoChooser = AutoBuilder.buildAutoChooser();
 
-        //SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
 
@@ -104,7 +106,11 @@ public class RobotContainer {
         roller.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
 
+       // ampSpeedSHoot.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(0.2, 0.2),
+                //                            () -> s_Shooter.stop()));
+
         
+
         //TODO NEED TO TEST!
        pickupNote.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
 
@@ -114,9 +120,11 @@ public class RobotContainer {
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
         // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
-        trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LTrapRollerSpeed,Constants.Shooter.RTrapRollerSpeed),
-                                            () -> s_Shooter.stop()));
+        //trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LTrapRollerSpeed,Constants.Shooter.RTrapRollerSpeed),
+                                           // () -> s_Shooter.stop()));
 
+        shootAgainstSubwoofer.whileTrue(new setArmPosition(s_Arm, 0.108));
+        ampSpeedSHoot.whileTrue(new setArmPosition(s_Arm, 0.090));
         //ORIGINAL FOR POT ARM LIMIT
         // open.and(new Trigger(s_Arm::upperLimitHit).negate()).
         // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4), //Negative is moving the arm up
@@ -184,6 +192,8 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new driveForwardAuton(s_Swerve);
+        //return new driveForwardAuton(s_Swerve);
+        //return new exampleAuto(s_Swerve);
+        return new middleAuton(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
     }
 }
