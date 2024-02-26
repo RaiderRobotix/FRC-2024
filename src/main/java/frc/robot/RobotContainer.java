@@ -50,12 +50,9 @@ public class RobotContainer {
     private final JoystickButton reverseintake = new JoystickButton(operator, 12);
     private final JoystickButton ampSpeedSHoot = new JoystickButton(operator, 4);
     
-
     private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 2);
     
-
-
     private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
