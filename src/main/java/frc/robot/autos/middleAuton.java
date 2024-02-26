@@ -31,15 +31,17 @@ public class middleAuton extends SequentialCommandGroup {
       new setArmPosition(m_Arm, 0.108),
       new runShooterConveyor(m_Conveyor, m_Shooter),
       new WaitCommand(2),
-      new setArmPosition(m_Arm, 0.05),
-      new DriveAtSpeed(m_Swerve, -0.4, 0,0,0.5),
       new pickup(m_Intake, m_Arm, m_Conveyor),
+      new ParallelCommandGroup(
+      new setArmPosition(m_Arm, 0.05),
+      new DriveAtSpeed(m_Swerve, -0.2, 0,0,1.5)),
+      //new pickup(m_Intake, m_Arm, m_Conveyor),
      // new DriveAtSpeed(m_Swerve, -0.4, 0,0,0.5),
       //new pickup(m_Intake, m_Arm, m_Conveyor),
-      new WaitCommand(4.0),
-      new DriveAtSpeed(m_Swerve, 0.2, 0, 0, 0.5),
-      new setArmPosition(m_Arm, 0.108),
-      new runShooterConveyor(m_Conveyor, m_Shooter),
-      new stopPickup(m_Intake, m_Arm, m_Conveyor));
+      new WaitCommand(2.0),
+      //new DriveAtSpeed(m_Swerve, 0.2, 0, 0, 1.5),
+      new setArmPosition(m_Arm, 0.0717),
+      new runShooterConveyor(m_Conveyor, m_Shooter));
+      //new stopPickup(m_Intake, m_Arm, m_Conveyor));
     }
   }

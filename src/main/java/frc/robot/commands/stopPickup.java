@@ -21,7 +21,7 @@ public class stopPickup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(() -> m_Intake.stop()),
-      new setArmPosition(m_Arm, 0.05),
+      //new setArmPosition(m_Arm, 0.05),
       new InstantCommand(() -> m_Conveyor.stopConveyor())
       
     );
