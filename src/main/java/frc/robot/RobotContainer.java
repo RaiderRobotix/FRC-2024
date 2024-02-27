@@ -55,7 +55,7 @@ public class RobotContainer {
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 12);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
     
-    //private final JoystickButton trapButton = new JoystickButton(operator, 8);
+    private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
@@ -128,11 +128,11 @@ public class RobotContainer {
         // trapButton.whileTrue(new InstantCommand(() -> s_roller.setSpeed(0.45,0.45)));
         // trapButton.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
         
-        //trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LTrapRollerSpeed,Constants.Shooter.RTrapRollerSpeed),
-                                           // () -> s_Shooter.stop()));
+        trapButton.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LTrapRollerSpeed,Constants.Shooter.RTrapRollerSpeed),
+                                           () -> s_Shooter.stop()));
 
-        shootAgainstSubwoofer.whileTrue(new setArmPosition(s_Arm, 0.108));
-        ampPositionButton.whileTrue(new setArmPosition(s_Arm, 0.090));
+        shootAgainstSubwoofer.onTrue(new setArmPosition(s_Arm, 0.108));
+        ampPositionButton.onTrue(new setArmPosition(s_Arm, 0.090));
         //ORIGINAL FOR POT ARM LIMIT
         // open.and(new Trigger(s_Arm::upperLimitHit).negate()).
         // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4), //Negative is moving the arm up
@@ -200,8 +200,9 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
+        return autoChooser.getSelected();
         //return new driveForwardAuton(s_Swerve);
         //return new exampleAuto(s_Swerve);
-        return new middleAuton(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
+        //return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
     }
 }

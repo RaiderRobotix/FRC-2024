@@ -58,11 +58,11 @@ public final class Constants {
         public static final boolean invertGyro = true; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-        COTSTalonFXSwerveConstants.SDS.MK4.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4.driveRatios.L2);
+        COTSTalonFXSwerveConstants.SDS.MK4.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4.driveRatios.L3);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(21.73); //TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(21.73); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(22.5); //TODO: This must be tuned to specific robot
+        public static final double wheelBase = Units.inchesToMeters(24); //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
@@ -101,13 +101,13 @@ public final class Constants {
         public static final double closedLoopRamp = 0.0;
 
         /* Angle Motor PID Values */
-        public static final double angleKP = 15.05;
-        public static final double angleKI = 0.0;
-        public static final double angleKD = 0.0;
+        public static final double angleKP = 0.5;
+        public static final double angleKI = 0;
+        public static final double angleKD = 0;
 
-        public static final double driveKP = 4.05; //TODO: This must be tuned to specific robot
-        public static final double driveKI = 4.0;
-        public static final double driveKD = 15.0;
+        public static final double driveKP = 0.005; //TODO: This must be tuned to specific robot
+        public static final double driveKI = 0.0;
+        public static final double driveKD = 0.05;
         public static final double driveKF = 0.0;
 
         /* Drive Motor Characterization Values 
