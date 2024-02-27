@@ -94,20 +94,20 @@ public class middleAutonTrajectory extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(() -> s_Swerve.setPose(toNoteTrajectory.getInitialPose())),
-      new setArmPosition(m_Arm, 0.108),
-      new runShooterConveyor(m_Conveyor, m_Shooter),
-      new WaitCommand(2),
-      new setArmPosition(m_Arm, 0.05),
+      //new InstantCommand(() -> s_Swerve.setPose(toNoteTrajectory.getInitialPose())),
+      //new setArmPosition(m_Arm, 0.108),
+      //new runShooterConveyor(m_Conveyor, m_Shooter),
+      //new WaitCommand(2),
+      //new setArmPosition(m_Arm, 0.05),
       toNoteTrajectoryCmd,
-      new pickup(m_Intake, m_Arm, m_Conveyor),
+      //new pickup(m_Intake, m_Arm, m_Conveyor),
      // new DriveAtSpeed(m_Swerve, -0.4, 0,0,0.5),
       //new pickup(m_Intake, m_Arm, m_Conveyor),
-      new WaitCommand(4.0),
-      toSpeakerCmd,
-      new setArmPosition(m_Arm, 0.108),
-      new runShooterConveyor(m_Conveyor, m_Shooter),
-      new stopPickup(m_Intake, m_Arm, m_Conveyor)
+      //new WaitCommand(4.0),
+      toSpeakerCmd
+      //new setArmPosition(m_Arm, 0.108),
+      //new runShooterConveyor(m_Conveyor, m_Shooter),
+      //new stopPickup(m_Intake, m_Arm, m_Conveyor)
     );
   }
 }

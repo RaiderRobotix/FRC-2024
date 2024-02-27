@@ -87,9 +87,9 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
 
-        autoChooser = AutoBuilder.buildAutoChooser();
+        //autoChooser = AutoBuilder.buildAutoChooser();
 
-        SmartDashboard.putData("Auto Chooser", autoChooser);
+        //SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
 
@@ -200,9 +200,9 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return autoChooser.getSelected();
+        //return autoChooser.getSelected();
         //return new driveForwardAuton(s_Swerve);
         //return new exampleAuto(s_Swerve);
-        //return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
+        return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
     }
 }
