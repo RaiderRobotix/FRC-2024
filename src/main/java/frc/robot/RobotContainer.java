@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -50,13 +51,13 @@ public class RobotContainer {
     //private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
     //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
-    private final JoystickButton ampPositionButton = new JoystickButton(operator, 10);
+    private final JoystickButton trapButton = new JoystickButton(operator, 10);
     
     //private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 12);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
     
-    private final JoystickButton trapButton = new JoystickButton(operator, 8);
+    //private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
 
@@ -69,7 +70,7 @@ public class RobotContainer {
     private final Conveyor s_Conveyor = new Conveyor();
     private final Climber s_Climber = new Climber();
 
-    private SendableChooser<Command> autoChooser;
+    //private SendableChooser<Command> autoChooser;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -90,13 +91,14 @@ public class RobotContainer {
         NamedCommands.registerCommand("Pickup", new pickup(s_Intake, s_Arm, s_Conveyor));
         NamedCommands.registerCommand("StopPickup", new stopPickup(s_Intake, s_Arm, s_Conveyor));
         NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.717));
+        NamedCommands.registerCommand("ZeroGyro", new InstantCommand(() -> s_Swerve.zeroGyro()));
 
         // Configure the button bindings
         configureButtonBindings();
 
-        autoChooser = AutoBuilder.buildAutoChooser();
+        //autoChooser = AutoBuilder.buildAutoChooser();
 
-        SmartDashboard.putData("Auto Chooser", autoChooser);
+        //SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
 
@@ -139,7 +141,7 @@ public class RobotContainer {
                                            () -> s_Shooter.stop()));
 
         shootAgainstSubwoofer.onTrue(new setArmPosition(s_Arm, 0.108));
-        ampPositionButton.onTrue(new setArmPosition(s_Arm, 0.090));
+        trapButton.onTrue(new setArmPosition(s_Arm, 0.1245));
         //ORIGINAL FOR POT ARM LIMIT
         // open.and(new Trigger(s_Arm::upperLimitHit).negate()).
         // whileTrue(new StartEndCommand(() -> s_Arm.setArmSpeed(-0.4), //Negative is moving the arm up
@@ -207,9 +209,11 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return autoChooser.getSelected();
+        //return autoChooser.getSelected();
         //return new driveForwardAuton(s_Swerve);
         //return new exampleAuto(s_Swerve);
         //return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
+        //return new middleAuton(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
+        return new PathPlannerAuto("Middle Auto");
     }
 }

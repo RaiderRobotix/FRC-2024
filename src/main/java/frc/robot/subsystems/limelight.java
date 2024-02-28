@@ -92,6 +92,13 @@ public class limelight extends SubsystemBase {
     return 0.0;
   }
 
+  public boolean isTrapTrue(){
+    if(estimateDistance() > 53.27 || estimateDistance() < 54.38 ){
+      return true;
+    }
+    return false;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -108,6 +115,7 @@ public class limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightV", tv);
     SmartDashboard.putNumber("LimelightArea", this.area);
     SmartDashboard.putNumber("Limelight Distance Value", estimateDistance());
+    SmartDashboard.putBoolean("In Trap Position", isTrapTrue());
     
 
 

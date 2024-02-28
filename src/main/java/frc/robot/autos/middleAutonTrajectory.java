@@ -55,7 +55,7 @@ public class middleAutonTrajectory extends SequentialCommandGroup {
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(/*new Translation2d(1, 1), new Translation2d(2, -1)*/),
                 // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(1.0414, 0, new Rotation2d(0)),
+                new Pose2d(-1.0414, 0, new Rotation2d(0)),
                 config);
 
     SwerveControllerCommand toNoteTrajectoryCmd =
@@ -72,7 +72,7 @@ public class middleAutonTrajectory extends SequentialCommandGroup {
     Trajectory toSpeakerTrajectory =
             TrajectoryGenerator.generateTrajectory(
                 // Start at the origin facing the +X direction
-                new Pose2d(1.0414, 0, new Rotation2d(0)),
+                new Pose2d(-1.0414, 0, new Rotation2d(0)),
                 // Pass through these two interior waypoints, making an 's' curve path
                 List.of(),
                 // End 3 meters straight ahead of where we started, facing forward
@@ -94,20 +94,21 @@ public class middleAutonTrajectory extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      //new InstantCommand(() -> s_Swerve.setPose(toNoteTrajectory.getInitialPose())),
-      //new setArmPosition(m_Arm, 0.108),
-      //new runShooterConveyor(m_Conveyor, m_Shooter),
-      //new WaitCommand(2),
-      //new setArmPosition(m_Arm, 0.05),
+      new InstantCommand(() -> s_Swerve.setPose(toNoteTrajectory.getInitialPose())),
+      new setArmPosition(m_Arm, 0.108),
+      new runShooterConveyor(m_Conveyor, m_Shooter),
+      new WaitCommand(2),
+      new setArmPosition(m_Arm, 0.05),
       toNoteTrajectoryCmd,
+      new pickup(m_Intake, m_Arm, m_Conveyor),
+      //new DriveAtSpeed(s_Swerve, -0.4, 0,0,0.5),
       //new pickup(m_Intake, m_Arm, m_Conveyor),
-     // new DriveAtSpeed(m_Swerve, -0.4, 0,0,0.5),
-      //new pickup(m_Intake, m_Arm, m_Conveyor),
-      //new WaitCommand(4.0),
-      toSpeakerCmd
-      //new setArmPosition(m_Arm, 0.108),
-      //new runShooterConveyor(m_Conveyor, m_Shooter),
-      //new stopPickup(m_Intake, m_Arm, m_Conveyor)
+      new WaitCommand(4.0),
+      toSpeakerCmd,
+      new setArmPosition(m_Arm, 0.108),
+      new runShooterConveyor(m_Conveyor, m_Shooter),
+      new WaitCommand(2),
+      new stopPickup(m_Intake, m_Arm, m_Conveyor)
     );
   }
 }
