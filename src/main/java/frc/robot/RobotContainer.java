@@ -3,6 +3,7 @@ package frc.robot;
 import java.time.Instant;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -84,12 +85,18 @@ public class RobotContainer {
             )
         );
 
+        NamedCommands.registerCommand("SubwooferArmPos", new setArmPosition(s_Arm, 0.108));
+        NamedCommands.registerCommand("ShooterConveyorRun", new runShooterConveyor(s_Conveyor, s_Shooter));
+        NamedCommands.registerCommand("Pickup", new pickup(s_Intake, s_Arm, s_Conveyor));
+        NamedCommands.registerCommand("StopPickup", new stopPickup(s_Intake, s_Arm, s_Conveyor));
+        NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.717));
+
         // Configure the button bindings
         configureButtonBindings();
 
-        //autoChooser = AutoBuilder.buildAutoChooser();
+        autoChooser = AutoBuilder.buildAutoChooser();
 
-        //SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
 
@@ -200,9 +207,9 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        //return autoChooser.getSelected();
+        return autoChooser.getSelected();
         //return new driveForwardAuton(s_Swerve);
         //return new exampleAuto(s_Swerve);
-        return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
+        //return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
     }
 }
