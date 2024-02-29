@@ -79,9 +79,9 @@ public class RobotContainer {
             new TeleopSwerve(
                 s_Swerve,
                 driver,
-                () -> driver.getRawAxis(translationAxis), 
-                () -> driver.getRawAxis(strafeAxis), 
-                () -> driver.getRawAxis(rotationAxis), 
+                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
+                () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
         );
@@ -90,8 +90,11 @@ public class RobotContainer {
         NamedCommands.registerCommand("ShooterConveyorRun", new runShooterConveyor(s_Conveyor, s_Shooter));
         NamedCommands.registerCommand("Pickup", new pickup(s_Intake, s_Arm, s_Conveyor));
         NamedCommands.registerCommand("StopPickup", new stopPickup(s_Intake, s_Arm, s_Conveyor));
-        NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.717));
+        NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.0738));
         NamedCommands.registerCommand("ZeroGyro", new InstantCommand(() -> s_Swerve.zeroGyro()));
+        NamedCommands.registerCommand("StopShooterConveyor", new stopShooterConveyor(s_Conveyor, s_Shooter));
+        NamedCommands.registerCommand("Run Shooter", new InstantCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed)));
+        NamedCommands.registerCommand("Run Conveyor", new InstantCommand(() -> s_Conveyor.runConveyor()));
 
         // Configure the button bindings
         configureButtonBindings();
