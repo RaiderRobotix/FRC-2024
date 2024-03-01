@@ -1,0 +1,55 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.8974524110137022,
+      "y": 6.409865331574141
+    },
+    "rotation": 59.74
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "ZeroGryo"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SideSubwooferPosition"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterConveyorRun"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "StopShooterConveyor"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SimpleSidePath"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

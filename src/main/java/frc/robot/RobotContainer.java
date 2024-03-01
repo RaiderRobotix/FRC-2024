@@ -51,11 +51,13 @@ public class RobotContainer {
     //private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
     //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
-    private final JoystickButton trapButton = new JoystickButton(operator, 10);
+    private final JoystickButton trapButton = new JoystickButton(operator, 8);
+    private final JoystickButton ampSpeed = new JoystickButton(operator, 6);
     
     //private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 12);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
+    private final JoystickButton sideSubwooferButton = new JoystickButton(operator, 10);
     
     //private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
@@ -70,7 +72,7 @@ public class RobotContainer {
     private final Conveyor s_Conveyor = new Conveyor();
     private final Climber s_Climber = new Climber();
 
-    //private SendableChooser<Command> autoChooser;
+    private SendableChooser<Command> autoChooser;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -95,6 +97,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("StopShooterConveyor", new stopShooterConveyor(s_Conveyor, s_Shooter));
         NamedCommands.registerCommand("Run Shooter", new InstantCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed)));
         NamedCommands.registerCommand("Run Conveyor", new InstantCommand(() -> s_Conveyor.runConveyor()));
+        NamedCommands.registerCommand("SideSubwooferPosition", new setArmPosition(s_Arm, 0.104));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -117,12 +120,24 @@ public class RobotContainer {
 
         roller.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
+        
+        ampSpeed.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(0.2,0.15),
+                                            () -> s_Shooter.stop()));
+                                            
+        roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(-Constants.Shooter.LRollerSpeed,-Constants.Shooter.RRollerSpeed),
+                                            () -> s_Shooter.stop()));
+        roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Conveyor.reverseConveyor(), () -> s_Conveyor.stopConveyor()));
+        roller.and(reverseButton).whileTrue(new setArmPosition(s_Arm, 0.0741));
 
         runClimber.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
-                                            () -> s_Climber.stop()));
+                                            () -> s_Climber.stop())); //0.124 for trap
                                 
         runClimber.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
                                             () -> s_Climber.stop()));
+        
+        sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.104));
+                    
+                    //0.104
         
                         
 
