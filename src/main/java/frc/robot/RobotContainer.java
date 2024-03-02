@@ -50,6 +50,7 @@ public class RobotContainer {
     private final JoystickButton runConveyor = new JoystickButton(operator, 9);
     //private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
+    private final JoystickButton driverIntake = new JoystickButton(driver, XboxController.Button.kB.value);
     //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
     private final JoystickButton trapButton = new JoystickButton(operator, 8);
     private final JoystickButton ampSpeed = new JoystickButton(operator, 6);
@@ -72,7 +73,8 @@ public class RobotContainer {
     private final Conveyor s_Conveyor = new Conveyor();
     private final Climber s_Climber = new Climber();
 
-    private SendableChooser<Command> autoChooser;
+   // private SendableChooser<Command> autoChooser;
+   private SendableChooser<Command> autonSelector;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -103,8 +105,10 @@ public class RobotContainer {
         configureButtonBindings();
 
         //autoChooser = AutoBuilder.buildAutoChooser();
+        autonSelector = AutoBuilder.buildAutoChooser("Middle Auto");
+        
 
-        //SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Auto Chooser", autonSelector);
     }
 
 
@@ -136,6 +140,11 @@ public class RobotContainer {
                                             () -> s_Climber.stop()));
         
         sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.104));
+
+        driverIntake.whileTrue(new StartEndCommand(() -> s_Conveyor.runConveyor(), () -> s_Conveyor.stopConveyor()));
+        driverIntake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
+                                            () -> s_Intake.stop())); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
+        
                     
                     //0.104
         
@@ -227,11 +236,11 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        //return autoChooser.getSelected();
+        return autonSelector.getSelected();
         //return new driveForwardAuton(s_Swerve);
         //return new exampleAuto(s_Swerve);
         //return new middleAutonTrajectory(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
         //return new middleAuton(s_Swerve, s_Arm, s_Conveyor, s_Shooter, s_Intake);
-        return new PathPlannerAuto("Middle Auto");
+        //return new PathPlannerAuto("Middle Auto");
     }
 }
