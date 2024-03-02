@@ -29,12 +29,12 @@ public class Conveyor extends SubsystemBase {
     conveyor.set(TalonSRXControlMode.PercentOutput, 0);
   }
 
-  public void reverseConveyor(){
-    conveyor.set(TalonSRXControlMode.PercentOutput, -Constants.Conveyor.MotorPercentOutput);
-  }
-
   public boolean getLineBreakerVal(){
     return lineBreaker.get();
+  }
+
+  public void reverseConveyor(){
+    conveyor.set(TalonSRXControlMode.PercentOutput, -Constants.Conveyor.MotorPercentOutput);
   }
 
 
