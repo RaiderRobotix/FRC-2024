@@ -53,16 +53,21 @@ public class RobotContainer {
     private final JoystickButton driverIntake = new JoystickButton(driver, XboxController.Button.kB.value);
     //private final JoystickButton reverseintake = new JoystickButton(operator, 12);
     private final JoystickButton trapButton = new JoystickButton(operator, 8);
-    private final JoystickButton ampSpeed = new JoystickButton(operator, 6);
+    //private final JoystickButton ampSpeed = new JoystickButton(operator, 6);
     
     //private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 12);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
     private final JoystickButton sideSubwooferButton = new JoystickButton(operator, 10);
     
+    //private final JoystickButton intakeButtonTest = new JoystickButton(operator, 4);
     //private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
+    private final JoystickButton driverClimb = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton driverReverseClimb = new JoystickButton(driver, XboxController.Button.kA.value);
+
+    private final JoystickButton armAllDown = new JoystickButton(operator, 4);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -94,7 +99,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("ShooterConveyorRun", new runShooterConveyor(s_Conveyor, s_Shooter));
         NamedCommands.registerCommand("Pickup", new pickup(s_Intake, s_Arm, s_Conveyor));
         NamedCommands.registerCommand("StopPickup", new stopPickup(s_Intake, s_Arm, s_Conveyor));
-        NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.0738));
+        NamedCommands.registerCommand("MiddleShootPos", new setArmPosition(s_Arm, 0.0743));
         NamedCommands.registerCommand("ZeroGyro", new InstantCommand(() -> s_Swerve.zeroGyro()));
         NamedCommands.registerCommand("StopShooterConveyor", new stopShooterConveyor(s_Conveyor, s_Shooter));
         NamedCommands.registerCommand("Run Shooter", new InstantCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed)));
@@ -125,18 +130,27 @@ public class RobotContainer {
         roller.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
         
-        ampSpeed.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(0.2,0.15),
-                                            () -> s_Shooter.stop()));
+
+        // intakeButtonTest.onTrue(new IntakeNote(s_Intake, s_Conveyor));
+        // ampSpeed.whileTrue(new ShootNote(s_Conveyor, s_Shooter));
                                             
         roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(-Constants.Shooter.LRollerSpeed,-Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
         roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Conveyor.reverseConveyor(), () -> s_Conveyor.stopConveyor()));
         roller.and(reverseButton).whileTrue(new setArmPosition(s_Arm, 0.0741));
 
+        armAllDown.onTrue(new setArmPosition(s_Arm, 0.05));
+
         runClimber.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
                                             () -> s_Climber.stop())); //0.124 for trap
                                 
         runClimber.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
+                                            () -> s_Climber.stop()));
+
+        driverClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
+                                            () -> s_Climber.stop())); //0.124 for trap
+                                
+        driverReverseClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
                                             () -> s_Climber.stop()));
         
         sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.104));

@@ -39,15 +39,23 @@ public class ShootNote extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed);
-    new WaitCommand(0.5);
-    if(noteInGullet && (count == 1)){
+    // s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed);
+    // new WaitCommand(0.5);
+    // if(noteInGullet && (count == 1)){
+    //   s_Conveyor.runConveyor();
+    // }
+    // else{
+    //   isFinished = true;
+    // }
+    
+    if(noteInGullet){
+      s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed);
+      new WaitCommand(0.5);
       s_Conveyor.runConveyor();
     }
     else{
       isFinished = true;
     }
-    
   }
 
   // Called once the command ends or is interrupted.

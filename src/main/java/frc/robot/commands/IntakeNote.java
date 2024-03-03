@@ -24,6 +24,7 @@ public class IntakeNote extends Command {
   public IntakeNote(intake s_Intake, Conveyor s_Conveyor ) {
     this.s_Intake = s_Intake;
     this.s_Conveyor = s_Conveyor;
+    this.time = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(s_Intake);
     addRequirements(s_Conveyor);
@@ -43,13 +44,16 @@ public class IntakeNote extends Command {
     if (noteInGullet) {
       time.start();
       count++;
+      s_Intake.setIntakeSpeed(0, 0);
     }
     if((count == 1)){
-      if(time.get() < 0.2){
+      if(time.get() < 0.4){
         s_Conveyor.runConveyor();
+        s_Intake.setIntakeSpeed(0, 0);
       }
       else{
         s_Conveyor.stopConveyor();
+        s_Intake.setIntakeSpeed(0, 0);
         isFinished = true;
       }
     } 

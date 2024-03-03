@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8001858657745748,
-        "y": 4.581254280991973
+        "x": 2.4681974175978434,
+        "y": 7.00319125756735
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9303232066179774,
-        "y": 3.4140557380640817
+        "x": 1.2476119738969333,
+        "y": 6.816474356535502
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.99,
-        "y": 1.429818215086667
+        "x": 2.4681974175978434,
+        "y": 5.553919733431884
       },
       "prevControl": {
-        "x": 1.6287679410429896,
-        "y": 1.9647842139286162
+        "x": 1.4681974175978434,
+        "y": 5.553919733431884
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,19 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0.95,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 1.0,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
       "name": "New Event Marker",
@@ -53,7 +41,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Pickup"
+                "name": "MiddleShootPos"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Run Shooter"
               }
             }
           ]
@@ -62,20 +56,20 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
+    "maxVelocity": 1.75,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -56.30993247402018,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": false
