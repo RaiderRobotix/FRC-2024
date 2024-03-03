@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2476119738969333,
+        "x": 1.2290622969786673,
         "y": 5.555830198500147
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2476119738969307,
+        "x": 2.2290622969786646,
         "y": 5.555830198500147
       },
       "isLocked": false,
@@ -29,19 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0.65,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 0.75,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Events ",
@@ -49,20 +37,13 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Pickup"
-              }
-            }
-          ]
+          "commands": []
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 1.5,
+    "maxVelocity": 0.75,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0

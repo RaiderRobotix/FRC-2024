@@ -41,13 +41,14 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton roller = new JoystickButton(operator, 1);
-    private final JoystickButton limelightTrack = new JoystickButton(operator, 6);
+   // private final JoystickButton limelightTrack = new JoystickButton(operator, 6);
     private final JoystickButton open = new JoystickButton(operator, 5);
     private final JoystickButton close = new JoystickButton(operator, 3);
-    private final JoystickButton runClimber = new JoystickButton(operator, 7);
+    private final JoystickButton runClimber = new JoystickButton(operator, 6);
+    private final JoystickButton pickupPreset = new JoystickButton(operator, 7);
     // private final JoystickButton openMan = new JoystickButton(operator, 11);
     // private final JoystickButton closeMan = new JoystickButton(operator, 12);
-    private final JoystickButton runConveyor = new JoystickButton(operator, 9);
+    private final JoystickButton runConveyor = new JoystickButton(operator, 12);
     //private final JoystickButton reverseConveyor = new JoystickButton(operator, 9);
     private final JoystickButton intake = new JoystickButton(operator, 11);
     private final JoystickButton driverIntake = new JoystickButton(driver, XboxController.Button.kB.value);
@@ -55,8 +56,9 @@ public class RobotContainer {
     private final JoystickButton trapButton = new JoystickButton(operator, 8);
     //private final JoystickButton ampSpeed = new JoystickButton(operator, 6);
     
+    
     //private final JoystickButton pickupNote = new JoystickButton(driver, XboxController.Button.kB.value);
-    private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 12);
+    private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 9);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
     private final JoystickButton sideSubwooferButton = new JoystickButton(operator, 10);
     
@@ -64,8 +66,8 @@ public class RobotContainer {
     //private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
-    private final JoystickButton driverClimb = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton driverReverseClimb = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton driverClimb = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton driverReverseClimb = new JoystickButton(driver, XboxController.Button.kY.value);
 
     private final JoystickButton armAllDown = new JoystickButton(operator, 4);
 
@@ -147,6 +149,8 @@ public class RobotContainer {
         runClimber.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
                                             () -> s_Climber.stop()));
 
+        
+
         driverClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
                                             () -> s_Climber.stop())); //0.124 for trap
                                 
@@ -170,7 +174,7 @@ public class RobotContainer {
         
 
         //TODO NEED TO TEST!
-       //pickupNote.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
+       pickupPreset.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
 
 
         //roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));
@@ -201,7 +205,7 @@ public class RobotContainer {
         whileTrue(new StartEndCommand(() -> s_Arm.moveArmDown(Constants.Arm.ManualMotorSpeed), //Positive is moving the arm down
                     () -> s_Arm.stop(),s_Arm));
 
-        limelightTrack.whileTrue(new InstantCommand(() -> s_Limelight.estimateDistance()));
+        //limelightTrack.whileTrue(new InstantCommand(() -> s_Limelight.estimateDistance()));
 
         // closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
         // closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));

@@ -48,8 +48,8 @@ public final class Constants {
         public static int LIntakeMotorID = 8;
         public static int RIntakeMotorID = 6;
 
-        public static double LIntakeMotorSpeed = 0.2;
-        public static double RIntakeMotorSpeed = 0.2;
+        public static double LIntakeMotorSpeed = 0.35;
+        public static double RIntakeMotorSpeed = 0.35;
 
     }
 
