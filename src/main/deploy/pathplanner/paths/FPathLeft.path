@@ -59,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "F-Path",
   "previewStartingState": {
     "rotation": 58.24051991518731,
     "velocity": 0

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.4681974175978434,
-        "y": 7.00319125756735
+        "x": 2.5905008158090483,
+        "y": 4.087081954477746
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2476119738969333,
-        "y": 6.816474356535502
+        "x": 2.5670791427174855,
+        "y": 5.550936522700434
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4681974175978434,
-        "y": 5.553919733431884
+        "x": 1.8995614596079393,
+        "y": 5.468960666879964
       },
       "prevControl": {
-        "x": 1.4681974175978434,
-        "y": 5.553919733431884
+        "x": 2.4733924503512332,
+        "y": 5.539225686154654
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,31 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.6,
+      "name": "Shoot Note",
+      "waypointRelativePos": 0.7,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Run Shooter"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "ShooterConveyorRun"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Stop Everything",
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,13 +64,7 @@
             {
               "type": "named",
               "data": {
-                "name": "MiddleShootPos"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Run Shooter"
+                "name": "StopShooterConveyor"
               }
             }
           ]
@@ -56,7 +73,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 1.75,
+    "maxVelocity": 7.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
@@ -67,9 +84,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Piece Middle",
+  "folder": "4 Piece Middle",
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": false

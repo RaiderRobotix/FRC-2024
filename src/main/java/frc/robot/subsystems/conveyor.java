@@ -35,7 +35,7 @@ public class Conveyor extends SubsystemBase {
   }
 
   public boolean getLineBreakerVal(){
-    return lineBreaker.get();
+    return !(lineBreaker.get());
   }
 
 

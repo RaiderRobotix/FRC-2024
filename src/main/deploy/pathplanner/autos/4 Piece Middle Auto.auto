@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.20862210340683,
+      "y": 5.550936522700434
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4 Piece Middle Part 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4 Piece Middle Part 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4 Piece Middle Part 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4 Piece Middle Part 4"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

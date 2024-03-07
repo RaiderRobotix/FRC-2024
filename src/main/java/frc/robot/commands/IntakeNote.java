@@ -15,8 +15,8 @@ public class IntakeNote extends Command {
   private intake s_Intake;
   private Conveyor s_Conveyor;
 
-  private int count;
-  private Timer time;
+  // private int count;
+  // private Timer time;
 
   private boolean noteInGullet;
   private boolean isFinished;
@@ -24,7 +24,7 @@ public class IntakeNote extends Command {
   public IntakeNote(intake s_Intake, Conveyor s_Conveyor ) {
     this.s_Intake = s_Intake;
     this.s_Conveyor = s_Conveyor;
-    this.time = new Timer();
+    //this.time = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(s_Intake);
     addRequirements(s_Conveyor);
@@ -35,36 +35,55 @@ public class IntakeNote extends Command {
   @Override
   public void initialize() {
     noteInGullet = s_Conveyor.getLineBreakerVal();
-    time.reset();
+    //time.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (noteInGullet) {
-      time.start();
-      count++;
+
+    if(noteInGullet){
+      s_Conveyor.stopConveyor();
       s_Intake.setIntakeSpeed(0, 0);
+      isFinished = true; 
     }
-    if((count == 1)){
-      if(time.get() < 0.4){
-        s_Conveyor.runConveyor();
-        s_Intake.setIntakeSpeed(0, 0);
-      }
-      else{
-        s_Conveyor.stopConveyor();
-        s_Intake.setIntakeSpeed(0, 0);
-        isFinished = true;
-      }
-    } 
-    // else if(noteInGullet && (count == 1)){
-    //   s_Conveyor.runConveyor();
-    // }
     else{
       s_Conveyor.runConveyor();
       s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed, Constants.Intake.RIntakeMotorSpeed);
-      
+
     }
+
+
+    // if (noteInGullet) {
+    //   time.start();
+    //   count++;
+    //   s_Intake.setIntakeSpeed(0, 0);
+    // }
+    // if((count == 1)){
+    //   if(time.get() < 0.4){
+    //     s_Conveyor.runConveyor();
+    //     s_Intake.setIntakeSpeed(0, 0);
+    //   }
+    //   else{
+    //     s_Conveyor.stopConveyor();
+    //     s_Intake.setIntakeSpeed(0, 0);
+    //     isFinished = true;
+    //   }
+    // }
+    
+    
+    // else if(noteInGullet && (count == 1)){
+    //   s_Conveyor.runConveyor();
+    // }
+    // else{
+    //   s_Conveyor.runConveyor();
+    //   s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed, Constants.Intake.RIntakeMotorSpeed);
+      
+    // }
+
+    
+
+
   }
 
   // Called once the command ends or is interrupted.

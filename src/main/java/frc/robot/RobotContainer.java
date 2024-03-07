@@ -107,6 +107,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Run Shooter", new InstantCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed)));
         NamedCommands.registerCommand("Run Conveyor", new InstantCommand(() -> s_Conveyor.runConveyor()));
         NamedCommands.registerCommand("SideSubwooferPosition", new setArmPosition(s_Arm, 0.104));
+        NamedCommands.registerCommand("IntakeNote", new IntakeNote(s_Intake, s_Conveyor));
 
         // Configure the button bindings
         configureButtonBindings();
