@@ -66,8 +66,8 @@ public class RobotContainer {
     //private final JoystickButton trapButton = new JoystickButton(operator, 8);
     
     //private final JoystickButton stop = new JoystickButton(driver, 9);
-    private final JoystickButton driverClimb = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton driverReverseClimb = new JoystickButton(driver, XboxController.Button.kY.value);
+    // private final JoystickButton driverClimb = new JoystickButton(driver, XboxController.Button.kA.value);
+    // private final JoystickButton driverReverseClimb = new JoystickButton(driver, XboxController.Button.kY.value);
 
     private final JoystickButton armAllDown = new JoystickButton(operator, 4);
 
@@ -152,11 +152,11 @@ public class RobotContainer {
 
         
 
-        driverClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
-                                            () -> s_Climber.stop())); //0.124 for trap
+        // driverClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(0.4),
+        //                                     () -> s_Climber.stop())); //0.124 for trap
                                 
-        driverReverseClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
-                                            () -> s_Climber.stop()));
+        // driverReverseClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
+        //                                     () -> s_Climber.stop()));
         
         sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.104));
 
@@ -208,11 +208,11 @@ public class RobotContainer {
 
         //limelightTrack.whileTrue(new InstantCommand(() -> s_Limelight.estimateDistance()));
 
-        // closeMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
-        // closeMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        // close.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(-0.4)));
+        // close.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
 
-        // openMan.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(0.4)));
-        // openMan.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
+        // open.whileTrue(new InstantCommand(() -> s_Arm.setArmSpeed(0.4)));
+        // open.whileFalse(new InstantCommand(() -> s_Arm.setArmSpeed(0)));
         
         
         runConveyor.whileTrue(new StartEndCommand(() -> s_Conveyor.runConveyor(),
@@ -226,11 +226,11 @@ public class RobotContainer {
 
         //runConveyor.toggleOnTrue(new InstantCommand(() -> s_Gullet.runConveyor()));
         // ADD REVERSE FOR INTAKE
-        intake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
+        intake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed,-Constants.Intake.RIntakeMotorSpeed),
                                             () -> s_Intake.stop())); // Speed for Intake has to be set to 0.35 percent with net and mesh on top - Montagna
         //intake.whileFalse(new InstantCommand(() -> s_Intake.setIntakeSpeed(0,0)));
 
-        intake.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed,-Constants.Intake.RIntakeMotorSpeed),
+        intake.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
                                                     () -> s_Intake.stop()));
 
 
