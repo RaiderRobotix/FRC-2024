@@ -30,14 +30,14 @@ public final class Constants {
     public static final class Conveyor{
         public static int TalonSRXDeviceID = 8;
 
-        public static double MotorPercentOutput = 0.2;
+        public static double MotorPercentOutput = 0.25;
     }
 
     public static final class Shooter{
         public static int TalonRRoller = 9;
         public static int TalonLRoller = 0;
 
-        public static double RRollerSpeed = 0.65;
+        public static double RRollerSpeed = 0.75;
         public static double LRollerSpeed = 1.0;
 
         public static double RTrapRollerSpeed = 0.45;

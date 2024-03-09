@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.20862210340683,
-      "y": 5.550936522700434
+      "x": 0.8704735487852787,
+      "y": 6.476107414920266
     },
-    "rotation": 0
+    "rotation": 58.67130713219583
   },
   "command": {
     "type": "sequential",
@@ -14,25 +14,37 @@
         {
           "type": "named",
           "data": {
-            "name": "MiddleShootPos"
+            "name": "ZeroGryo"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Run Shooter"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.25
+            "name": "SideSubwooferPosition"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "ShooterConveyorRun"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "StopShooterConveyor"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left2PeicePart1"
           }
         },
         {
@@ -42,15 +54,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "3 Piece Part 1"
+            "name": "StopPickup"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "3 Piece Part 2"
+            "pathName": "Left2PeicePart2"
           }
         },
         {
@@ -62,31 +74,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "3 Piece Part 3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "3 Piece Part 4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterConveyorRun"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
+            "waitTime": 1.0
           }
         },
         {

@@ -45,7 +45,7 @@ public class RobotContainer {
     private final JoystickButton open = new JoystickButton(operator, 5);
     private final JoystickButton close = new JoystickButton(operator, 3);
     private final JoystickButton runClimber = new JoystickButton(operator, 6);
-    private final JoystickButton pickupPreset = new JoystickButton(operator, 7);
+    private final JoystickButton hpPreset = new JoystickButton(operator, 7);
     // private final JoystickButton openMan = new JoystickButton(operator, 11);
     // private final JoystickButton closeMan = new JoystickButton(operator, 12);
     private final JoystickButton runConveyor = new JoystickButton(operator, 12);
@@ -61,6 +61,7 @@ public class RobotContainer {
     private final JoystickButton shootAgainstSubwoofer = new JoystickButton(operator, 9);
     private final JoystickButton reverseButton = new JoystickButton(operator, 2);
     private final JoystickButton sideSubwooferButton = new JoystickButton(operator, 10);
+    private final JoystickButton intakeNoteTest = new JoystickButton(driver, XboxController.Button.kA.value);
     
     //private final JoystickButton intakeButtonTest = new JoystickButton(operator, 4);
     //private final JoystickButton trapButton = new JoystickButton(operator, 8);
@@ -106,7 +107,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("StopShooterConveyor", new stopShooterConveyor(s_Conveyor, s_Shooter));
         NamedCommands.registerCommand("Run Shooter", new InstantCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed, Constants.Shooter.RRollerSpeed)));
         NamedCommands.registerCommand("Run Conveyor", new InstantCommand(() -> s_Conveyor.runConveyor()));
-        NamedCommands.registerCommand("SideSubwooferPosition", new setArmPosition(s_Arm, 0.104));
+        NamedCommands.registerCommand("SideSubwooferPosition", new setArmPosition(s_Arm, 0.1189));
         NamedCommands.registerCommand("IntakeNote", new IntakeNote(s_Intake, s_Conveyor));
 
         // Configure the button bindings
@@ -132,15 +133,19 @@ public class RobotContainer {
 
         roller.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(Constants.Shooter.LRollerSpeed,Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
+        // roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(-Constants.Shooter.LRollerSpeed,-Constants.Shooter.RRollerSpeed),
+        //                                     () -> s_Shooter.stop()));
+
+        intakeNoteTest.onTrue(new IntakeNote(s_Intake, s_Conveyor));
         
 
         // intakeButtonTest.onTrue(new IntakeNote(s_Intake, s_Conveyor));
         // ampSpeed.whileTrue(new ShootNote(s_Conveyor, s_Shooter));
                                             
-        roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(-Constants.Shooter.LRollerSpeed,-Constants.Shooter.RRollerSpeed),
+        hpPreset.whileTrue(new StartEndCommand(() -> s_Shooter.setSpeed(-Constants.Shooter.LRollerSpeed,-Constants.Shooter.RRollerSpeed),
                                             () -> s_Shooter.stop()));
-        roller.and(reverseButton).whileTrue(new StartEndCommand(() -> s_Conveyor.reverseConveyor(), () -> s_Conveyor.stopConveyor()));
-        roller.and(reverseButton).whileTrue(new setArmPosition(s_Arm, 0.0741));
+        hpPreset.whileTrue(new StartEndCommand(() -> s_Conveyor.reverseConveyor(), () -> s_Conveyor.stopConveyor()));
+        hpPreset.whileTrue(new setArmPosition(s_Arm, 0.0741));
 
         armAllDown.onTrue(new setArmPosition(s_Arm, 0.05));
 
@@ -158,7 +163,7 @@ public class RobotContainer {
         // driverReverseClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
         //                                     () -> s_Climber.stop()));
         
-        sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.1123));
+        sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.1188));
 
         driverIntake.whileTrue(new StartEndCommand(() -> s_Conveyor.runConveyor(), () -> s_Conveyor.stopConveyor()));
         driverIntake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),
@@ -175,7 +180,7 @@ public class RobotContainer {
         
 
         //TODO NEED TO TEST!
-       pickupPreset.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
+       //pickupPreset.whileTrue(new pickup(s_Intake, s_Arm, s_Conveyor)).whileFalse(new stopPickup(s_Intake, s_Arm, s_Conveyor));
 
 
         //roller.whileFalse(new InstantCommand(() -> s_roller.setSpeed(0,0)));

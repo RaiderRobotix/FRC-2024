@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.244095130415294,
-        "y": 5.542053460845229
+        "x": 0.9327438123902813,
+        "y": 4.670269770375193
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2440951304152943,
-        "y": 5.542053460845229
+        "x": 3.0628811532336844,
+        "y": 3.5030712274473017
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4998787797828452,
-        "y": 6.963891146492787
+        "x": 8.279983195037481,
+        "y": 0.7586790529031283
       },
       "prevControl": {
-        "x": 1.1506897350077903,
-        "y": 7.02616141009779
+        "x": 1.9187511360804703,
+        "y": 1.2936450517450777
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,21 +29,27 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 0.95,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
-      "name": "Pickup Note",
-      "waypointRelativePos": 0.4,
+      "name": "Pickup",
+      "waypointRelativePos": 0.6,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "StopShooterConveyor"
-              }
-            },
             {
               "type": "named",
               "data": {
@@ -56,7 +62,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 7.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
@@ -67,10 +73,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Piece Middle Test",
+  "folder": "Right2Piece",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -56.30993247402018,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

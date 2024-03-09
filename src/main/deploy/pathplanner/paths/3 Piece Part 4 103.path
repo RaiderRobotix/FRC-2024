@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.244095130415294,
-        "y": 5.542053460845229
+        "x": 2.5621490433878478,
+        "y": 4.2343779251401745
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2440951304152943,
-        "y": 5.542053460845229
+        "x": 2.541392288852846,
+        "y": 3.321080725600137
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4998787797828452,
-        "y": 6.963891146492787
+        "x": 1.202581621345292,
+        "y": 5.531675083577728
       },
       "prevControl": {
-        "x": 1.1506897350077903,
-        "y": 7.02616141009779
+        "x": 2.655554438795352,
+        "y": 5.59394534718273
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,7 +29,19 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Shoot",
+      "minWaypointRelativePos": 0.8,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
       "name": "Pickup Note",
@@ -41,13 +53,7 @@
             {
               "type": "named",
               "data": {
-                "name": "StopShooterConveyor"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeNote"
+                "name": "Run Shooter"
               }
             }
           ]

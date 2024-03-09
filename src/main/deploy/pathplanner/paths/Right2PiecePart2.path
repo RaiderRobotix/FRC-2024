@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.244095130415294,
-        "y": 5.542053460845229
+        "x": 8.299436504086279,
+        "y": 0.7489523983787291
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2440951304152943,
-        "y": 5.542053460845229
+        "x": 3.727908877618702,
+        "y": 1.4006382515134694
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4998787797828452,
-        "y": 6.963891146492787
+        "x": 0.93,
+        "y": 4.67
       },
       "prevControl": {
-        "x": 1.1506897350077903,
-        "y": 7.02616141009779
+        "x": 0.9980865816707937,
+        "y": 3.2596350939621304
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,25 +29,31 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Shoot",
+      "minWaypointRelativePos": 0.85,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
-      "name": "Pickup Note",
-      "waypointRelativePos": 0.4,
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.65,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
-                "name": "StopShooterConveyor"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeNote"
+                "name": "Run Shooter"
               }
             }
           ]
@@ -56,21 +62,21 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 7.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -59.42077312751117,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Piece Middle Test",
+  "folder": "Right2Piece",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

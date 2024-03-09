@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8001858657745748,
-      "y": 4.581254280991973
+      "x": 1.20862210340683,
+      "y": 5.550936522700434
     },
-    "rotation": -51.84277341263083
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,13 +14,19 @@
         {
           "type": "named",
           "data": {
-            "name": "ZeroGryo"
+            "name": "MiddleShootPos"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SideSubwooferPosition"
+            "name": "Run Shooter"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
           }
         },
         {
@@ -32,19 +38,25 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "StopShooterConveyor"
+            "waitTime": 0.75
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueLeft2PeicePart1"
+            "pathName": "3 Piece Part 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Piece Part 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterConveyorRun"
           }
         },
         {
@@ -54,15 +66,15 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "StopPickup"
+            "pathName": "3 Piece Part 3 103"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueLeft2PiecePart2"
+            "pathName": "3 Piece Part 4 103"
           }
         },
         {
@@ -74,7 +86,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.5
           }
         },
         {
