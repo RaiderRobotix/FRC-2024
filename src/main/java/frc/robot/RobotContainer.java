@@ -158,7 +158,7 @@ public class RobotContainer {
         // driverReverseClimb.whileTrue(new StartEndCommand(() -> s_Climber.setSpeed(-0.4),
         //                                     () -> s_Climber.stop()));
         
-        sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.104));
+        sideSubwooferButton.onTrue(new setArmPosition(s_Arm, 0.1123));
 
         driverIntake.whileTrue(new StartEndCommand(() -> s_Conveyor.runConveyor(), () -> s_Conveyor.stopConveyor()));
         driverIntake.whileTrue(new StartEndCommand(() -> s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed,Constants.Intake.RIntakeMotorSpeed),

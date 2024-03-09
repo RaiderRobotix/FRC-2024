@@ -20,7 +20,7 @@ public class pickup extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(() -> m_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed, Constants.Intake.RIntakeMotorSpeed)),
+      new InstantCommand(() -> m_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed, -Constants.Intake.RIntakeMotorSpeed)),
       new setArmPosition(m_Arm, 0.05),
       new InstantCommand(() -> m_Conveyor.runConveyor())
       

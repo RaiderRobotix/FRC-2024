@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.468813556742662,
-        "y": 5.152768080143863
+        "x": 2.7593382114703564,
+        "y": 5.023134597470206
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.60221165235483,
-        "y": 7.003080254377342
+        "x": 2.5621490433878478,
+        "y": 7.057296541900291
       },
       "prevControl": {
-        "x": 0.6816344588466624,
-        "y": 6.9679477447399965
+        "x": 0.64157184987968,
+        "y": 7.022164032262945
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,6 +34,17 @@
       "name": "Pickup Zone",
       "minWaypointRelativePos": 0.75,
       "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    },
+    {
+      "name": "Shoot Zone",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.2,
       "constraints": {
         "maxVelocity": 2.0,
         "maxAcceleration": 3.0,

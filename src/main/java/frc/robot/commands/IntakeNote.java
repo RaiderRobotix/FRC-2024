@@ -49,7 +49,7 @@ public class IntakeNote extends Command {
     }
     else{
       s_Conveyor.runConveyor();
-      s_Intake.setIntakeSpeed(Constants.Intake.LIntakeMotorSpeed, Constants.Intake.RIntakeMotorSpeed);
+      s_Intake.setIntakeSpeed(-Constants.Intake.LIntakeMotorSpeed, -Constants.Intake.RIntakeMotorSpeed);
 
     }
 
