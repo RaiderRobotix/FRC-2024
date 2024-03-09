@@ -28,7 +28,7 @@ public final class Constants {
     }
 
     public static final class Conveyor{
-        public static int TalonSRXDeviceID = 7;
+        public static int TalonSRXDeviceID = 8;
 
         public static double MotorPercentOutput = 0.2;
     }
